@@ -19,8 +19,6 @@ endif()
 
 configure_file(OLASConfig.h.in OLASConfig.h)
 
-
-
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
 
@@ -45,4 +43,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
 
 # add_subdirectory(external/glfw)
+
+
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(FILES "${PROJECT_BINARY_DIR}/OLASConfig.h" DESTINATION include)
 
