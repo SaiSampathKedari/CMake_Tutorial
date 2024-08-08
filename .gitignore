@@ -49,3 +49,5 @@ CMakeUserPresets.json
 out/build
 
 [Bb][Uu][Ii][Ll][Dd]/
+
+out/build/OLAS
