@@ -1,14 +1,27 @@
 cmake_minimum_required(VERSION 3.16.3)
 
 project(OLAS VERSION 1.0) # (VERSION 1.0) we want the source code know what version
+add_executable(${PROJECT_NAME} main.cpp)
+
+
+# adder use logic
+option(USE_ADDER "A simple library for adding 2 floats." ON)
+if(USE_ADDER)
+    add_subdirectory(Adder)
+
+    # list(APPEND EXTRA_LIBS Adder)
+    # list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/Adder")
+
+    target_include_directories(${PROJECT_NAME} PUBLIC Adder)
+    target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/Adder)
+    target_link_libraries(${PROJECT_NAME} adder)
+endif()
 
 configure_file(OLASConfig.h.in OLASConfig.h)
 
-add_executable(${PROJECT_NAME} main.cpp)
+
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
-
-add_subdirectory(Adder)
 
 
 # # DOWNLOAD ALL THE SUBMODULES
@@ -32,8 +45,4 @@ add_subdirectory(Adder)
 
 
 # add_subdirectory(external/glfw)
-target_include_directories(${PROJECT_NAME} PUBLIC Adder)
 
-target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/Adder)
-
-target_link_libraries(${PROJECT_NAME} adder)
